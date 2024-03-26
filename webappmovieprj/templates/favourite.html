@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+<div>
+    <div class="row my_row_class">
+        <div class="mx-auto">
+            <p>
+<!--                <a href="{% url 'movieapp:allMovieCat' %}">Home</a>-->
+            </p>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h1 class="text-center my_title"><b style="font-weight: bold; color: red;">FAVOURITES</b></h1>
+
+</div>
+
+<div class="container">
+<!--        <div class="row mx-auto">-->
+<!--                <p class="text-center my_search_text">You have no movies right now.Kindly upload movies.</p>-->
+<!--        </div>-->
+
+    <div class="row">
+        {% if movies %}
+            {% for movie1 in movies %}
+            <div class="col-md-4" style="padding:5px;">
+                <div class="card h-100" style="cx">
+  <img src="{{movie1.movie.image.url}}" class="card-img-top" alt="{{movie1.movie.name}}">
+  <div class="card-body d-flex flex-column justify-content-center">
+    <h5 class="card-title text-center">{{movie1.movie.name}}</h5>
+    <div class="mt-auto text-right" style="margin-bottom: 10px; margin-right: 10px;">
+      <a class="btn btn-danger" href="{% url 'favouritesapp:remove_favourites' movie1.movie.id %}">Remove Favourite</a>
+    </div>
+  </div>
+</div>
+
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="row mx-auto">
+                <p class="text-center my_search_text" style="color:blue">You have no favourites.Add them</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

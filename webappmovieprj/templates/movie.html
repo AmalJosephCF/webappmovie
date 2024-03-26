@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+        {{ Movie.pdesc|truncatewords:150 }}
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{ movie.name}}
+    {% endif%}
+{% endblock %}
+{% block content %}
+<div class="row my_prod_row_class">
+    <div class="mx_auto">
+        <p>
+
+        </p>
+    </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem">
+            <img src="{{movie.image.url}}" alt="{{movie.name}}" style="width:100%;">
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div>
+            <h1 class="my_mov_title" style="color: blue;">{{movie.name}}</h1><br>
+                <p class="my_title"><h5>Movie Description</h5></p>
+            <p class="text-justify my_mov_text">{{movie.desc}}</p>
+                <p class="my_title"><h5>Movie Cast</h5></p>
+            <p class="text-justify my_mov_text">{{movie.cast}}</p>
+            <p class="my_title"><h5>Released on</h5></p>
+            <p class="text-justify my_mov_text">{{movie.rel_date}}</p>
+            <p class="my_title"><h5>Genre</h5></p>
+            <p class="text-justify my_mov_text">{{movie.category}}</p>
+            <p class="my_title"><h5>Trailer</h5></p>
+            <a href="{{movie.trailer}}">Click to view trailer</a><br><br>
+             {% if user.is_authenticated %}
+            <a class="btn btn-secondary" href="{% url 'favouritesapp:add_to_favourites' movie.id %}" style="background-color: blue; border-color: blue;">Add to Favourite</a>
+             {% endif %}
+        </div>
+        <br><br>
+
+
+    </div>
+</div>
+</div>
+<br> <br> <br> <br> <br><br> <br>
+{% endblock %}

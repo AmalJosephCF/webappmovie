@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div>
+		<div>
+			{% if user.is_authenticated %}
+			<form action="{% url 'userreviewapp:addReview' %}" method='post'>
+				{% csrf_token %}
+				<table align="center" >
+					<tr>
+						<td>
+							<input type="text" name="desc" placeholder="Enter your review">
+						</td>
+						<td>
+							<input type="submit">
+						</td>
+					</tr>
+				</table>
+			</form>
+			{% endif %}
+		</div>
+	</div>
+</div>
+</div>
+<div>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+		<div class="col-md-12">
+		    <div class="blog-comment">
+				<h3 style="color: blue;">Reviews</h3>
+                <hr/>
+				<ul class="comments">
+					{% for rv in review %}
+						<li class="clearfix">
+						  <div class="post-comments" style="font-weight: bold; font-size: 1.2em; color: #333; background-color: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+    <p class="meta" style="margin-bottom: 5px;">{{rv.created}}</p>
+    <p style="margin-bottom: 5px; margin-right: 5px; font-weight: bold; text-transform: uppercase;">{{rv.uname}} Posted :</p>
+    <p style="margin-bottom: 0;">{{rv.desc}}</p>
+		{% if request.user == rv.uname %}
+        <form action="{% url 'userreviewapp:deleteReview' rv.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete" class="btn btn-danger">
+
+        </form>
+    {% endif %}
+</div>
+
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

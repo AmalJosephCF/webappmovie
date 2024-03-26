@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+<div>
+<!--    <div class="row my_row_class">-->
+<!--        <div class="mx-auto">-->
+<!--            <p>-->
+<!--                <a href="{% url 'movieapp:allMovieCat' %}">Home</a>-->
+<!--            </p>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+
+<div>
+    <h1 class="text-center my_title">My Movies<br><br></h1>
+</div>
+
+<div class="container">
+<!--        <div class="row mx-auto">-->
+<!--                <p class="text-center my_search_text">You have no movies right now.Kindly upload movies.</p>-->
+<!--        </div>-->
+
+    <div class="row">
+        {% if movies %}
+            {% for movie in movies %}
+            <div class="col-md-4" style="padding:5px;">
+   <div class="card h-100 text-center" style="max-width: 540px;">
+  <a href="{{movie.get_url}}"><img src="{{movie.image.url}}" alt="{{movie.name}}" style="height:300px;width:100%"></a>
+  <div class="card-body">
+    <h5 class="card-title">{{movie.name}}</h5>
+    <p class="card-text"><br><br></p>
+    <div style="position: absolute; bottom: 10px; left: 10px;">
+      <a class="btn btn-warning" href="{% url 'movieapp:updateMovie' movie.id %}">Update</a>
+    </div>
+    <div style="position: absolute; bottom: 10px; right: 10px;">
+      <a class="btn btn-danger" href="{% url 'movieapp:delete' movie.id %}">Delete</a>
+    </div>
+  </div>
+</div>
+
+
+            </div>
+
+
+            {% endfor %}
+        {% else %}
+            <div class="row mx-auto">
+                <p class="text-center my_search_text">You have no movies right now.Kindly upload movies.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

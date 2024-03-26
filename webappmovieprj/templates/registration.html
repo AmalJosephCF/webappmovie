@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+        Welcome to RKM wholesale ecom store.
+
+{% endblock %}
+{% block title %}
+Movie Website and Recommendation Platform
+
+{% endblock %}
+{% block content %}
+<h1 style="text-align:center">Enter your details</h1>
+<form action="{% url 'credentialsapp:registrations' %}" method='post'>
+    {% csrf_token %}
+    <table align="center" >
+        <tr>
+            <td>
+                <input type="text" name="username" placeholder="Enter the username">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="firstname" placeholder="Enter the firstname">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="secondname" placeholder="Enter the lastname">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="email" name="email" placeholder="Enter the email">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="password" name="password" placeholder="Enter the password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="password" name="confirmpaswword" placeholder="Please confirm password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit">
+            </td>
+        </tr>
+    </table>
+</form>
+{% if profile_created %}
+    <div style="text-align:center">
+        <p>Profile created successfully,Please Proceed to Login</p>
+
+    </div>
+{% endif %}
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

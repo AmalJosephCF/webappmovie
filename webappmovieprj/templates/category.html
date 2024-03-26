@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+        {{ category.desc|truncatewords:150 }}
+    {% else %}
+        Welcome to movie store.
+    {% endif%}
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{ category.name}} -movie
+    {% else %}
+        Movie Website and Recommendation Platform
+    {% endif%}
+{% endblock %}
+{% block content %}
+    {% if category %}
+        <div>
+            <div class="row my_row_class">
+                <div class="mx-auto">
+                    <p>
+                        <a href="{% url 'movieapp:allMovieCat' %}">Home</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div>
+        <h1 class="text-center my_title">MOVIES</h1>
+
+    </div>
+
+<div class="mx_auto">
+            {% if movies.paginator.num_pages > 1 %}
+            <hr>
+        <div class="text-center">
+                {% for pg in movies.paginator.page_range %}
+                    <a href="?page={{pg}}" class="btn btn-light btn-sm {% if movies.number == pg %} active {% endif %}" >{{pg}}</a>
+                {% endfor %}
+        </div>
+            {% endif %}
+    </div>
+<div class="container">
+    <div class="row">
+
+        {% if movies.object_list %}
+                {% for movie in movies.object_list %}
+                <div class="col-md-4" style="padding: 5px;">
+  <div class="card h-100" style="max-width: 540px;">
+    <a href="{{movie.get_url}}">
+      <img src="{{movie.image.url}}" class="card-img-top" alt="{{movie.name}}">
+    </a>
+    <div class="card-body d-flex flex-column justify-content-center">
+      <h5 class="card-title text-center">{{movie.name}}</h5>
+    </div>
+  </div>
+</div>
+
+                {% endfor %}
+        {% else %}
+           <div class="row mx-auto">
+                <p class="text-center my_search_text">You have no movies right now.Kindly upload movies.</p>
+            </div>
+        {% endif %}
+
+
+    </div>
+
+
+
+
+        <br>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

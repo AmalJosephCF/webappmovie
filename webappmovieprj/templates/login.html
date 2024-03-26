@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+       Movie Website and Recommendation Platform
+
+
+{% endblock %}
+{% block title %}
+Movie Website and Recommendation Platform
+{% endblock %}
+{% block content %}
+<h1 style="text-align:center; color: blue;">Login</h1>
+<form action="{% url 'credentialsapp:login' %}" method='post'>
+    {% csrf_token %}
+    <table align="center" >
+        <tr>
+            <td>
+                <input type="text" name="username" placeholder="Enter the username">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="password" name="password" placeholder="Enter the password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" style="background-color: blue; color: white;">
+            </td>
+        </tr>
+    </table>
+
+</form>
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

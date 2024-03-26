@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="text-align:center;">Add Movie</h1>
+<form action="{% url 'movieapp:add' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table align="center" border="">
+        <tr style="margin-bottom: 10px;">
+            <td>
+                <label style="font-weight: bold;">Name:</label>
+            </td>
+            <td>
+                <input type="text" name="name" placeholder="Movie Name"><br>
+            </td>
+        </tr>
+        <tr style="margin-bottom: 10px;">
+            <td>
+                <label style="font-weight: bold;">Description:</label>
+            </td>
+            <td>
+                <input type="text" name="desc" placeholder="Movie Description"><br>
+            </td>
+        </tr>
+        <tr style="margin-bottom: 10px;">
+            <td>
+                <label style="font-weight: bold;">Release Date:</label>
+            </td>
+            <td>
+                <input type="date" name="rel_date" placeholder="Date of Release"><br>
+            </td>
+        </tr>
+        <tr style="margin-bottom: 10px;">
+            <td>
+                <label style="font-weight: bold;">Cast:</label>
+            </td>
+            <td>
+                <input type="text" name="cast" placeholder="Actors Name"><br>
+            </td>
+        </tr>
+        <tr style="margin-bottom: 10px;">
+            <td>
+                <label style="font-weight: bold;">Category:</label>
+            </td>
+            <td>
+                <select name="genre" id="genre">
+                    {% for cat in links %}
+                    <option value="{{cat.name}}">{{cat.name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr style="margin-bottom: 10px;">
+            <td>
+                <label style="font-weight: bold;">Poster:</label>
+            </td>
+            <td>
+                <input type="file" name="img"><br>
+            </td>
+        </tr>
+        <tr style="margin-bottom: 10px;">
+            <td>
+                <label style="font-weight: bold;">Trailer:</label>
+            </td>
+            <td>
+                <input type="text" name="trailer" placeholder="Paste the Trailer link"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" name="uid" value="{{request.user.id}}">
+            </td>
+            <td>
+                <input type="submit" class="btn btn-primary">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<br><br><br><br><br><br><br><br>
+<br><br><br><br>
+{% endblock %}
